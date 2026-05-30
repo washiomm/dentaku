@@ -205,10 +205,8 @@ function updateClock(){
     document.getElementById("clock");
 
   if(clock){
-
-    clock.textContent =
-      `${h}:${m}:${s}`;
-
+clock.textContent =
+`${h}時${m}分${s}秒`;
   }
 
 }
