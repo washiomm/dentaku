@@ -1,96 +1,61 @@
 /* ========================================
    weather.js
+   東京の実際の天気
 ======================================== */
 
-const weather =
-document.getElementById(
-  "weather"
-);
+const weatherElement =
+document.getElementById("weather");
 
-const weatherList = [
+/*
+東京都の天気予報
+気象庁API
+130000 = 東京都
+*/
 
-  "☀️ 晴れ 26℃",
-  "☁️ 曇り 22℃",
-  "🌧️ 雨 18℃",
-  "❄️ 雪 0℃"
+async function getTokyoWeather(){
 
-];
+  try{
 
-function fakeWeather(){
-
-  const item =
-  weatherList[
-    new Date().getDate()
-    % weatherList.length
-  ];
-
-  weather.textContent =
-  item;
-
-  if(item.includes("雨")){
-    createRain();
-  }
-
-  if(item.includes("雪")){
-    createSnow();
-  }
-
-}
-
-fakeWeather();
-
-function createRain(){
-
-  setInterval(()=>{
-
-    const rain =
-    document.createElement("div");
-
-    rain.className =
-    "rain";
-
-    rain.style.left =
-    Math.random()*100+"vw";
-
-    rain.style.animationDuration =
-    .5+Math.random()+"s";
-
-    document.body.appendChild(
-      rain
+    const response =
+    await fetch(
+      "https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json"
     );
 
-    setTimeout(()=>{
-      rain.remove();
-    },2000);
+    const data =
+    await response.json();
 
-  },50);
+    const area =
+    data[0].timeSeries[0].areas[0];
+
+    const weather =
+    area.weathers[0];
+
+    weatherElement.textContent =
+    "📍東京 " + weather;
+
+    if(
+      weather.includes("雨")
+    ){
+      createRain();
+    }
+
+    if(
+      weather.includes("雪")
+    ){
+      createSnow();
+    }
+
+  }
+
+  catch(error){
+
+    weatherElement.textContent =
+    "天気取得失敗";
+
+    console.error(error);
+
+  }
 
 }
 
-function createSnow(){
-
-  setInterval(()=>{
-
-    const snow =
-    document.createElement("div");
-
-    snow.className =
-    "snow";
-
-    snow.style.left =
-    Math.random()*100+"vw";
-
-    snow.style.animationDuration =
-    3+Math.random()*4+"s";
-
-    document.body.appendChild(
-      snow
-    );
-
-    setTimeout(()=>{
-      snow.remove();
-    },8000);
-
-  },150);
-
-}
+getTokyoWeather();
