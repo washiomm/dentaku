@@ -1,0 +1,619 @@
+/* ========================================
+   Dream Calculator Ultimate
+   style.css
+======================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:
+  "SF Pro Display",
+  "Hiragino Sans",
+  sans-serif;
+}
+
+/* ======================
+   背景
+====================== */
+
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  background:#000;
+}
+
+/* ======================
+   空
+====================== */
+
+.sky{
+  position:fixed;
+  inset:0;
+
+  background:
+  linear-gradient(
+    -45deg,
+    #ffd7f6,
+    #f5cfff,
+    #d7c9ff,
+    #ffcbe9
+  );
+
+  background-size:
+  400% 400%;
+
+  animation:
+  skyMove 18s ease infinite;
+
+  z-index:-10;
+}
+
+@keyframes skyMove{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+/* ======================
+   オーロラ
+====================== */
+
+.aurora{
+  position:fixed;
+  inset:-200px;
+
+  background:
+  radial-gradient(
+    circle at 20% 30%,
+    rgba(255,180,255,.35),
+    transparent 40%
+  ),
+
+  radial-gradient(
+    circle at 70% 40%,
+    rgba(180,220,255,.25),
+    transparent 45%
+  ),
+
+  radial-gradient(
+    circle at 50% 80%,
+    rgba(255,220,180,.25),
+    transparent 45%
+  );
+
+  filter:blur(120px);
+
+  animation:
+  auroraMove 15s ease infinite;
+
+  z-index:-9;
+}
+
+@keyframes auroraMove{
+
+  0%{
+    transform:translateX(-50px);
+  }
+
+  50%{
+    transform:translateX(50px);
+  }
+
+  100%{
+    transform:translateX(-50px);
+  }
+
+}
+
+/* ======================
+   星空
+====================== */
+
+#stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-5;
+}
+
+.star{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  background:white;
+
+  border-radius:50%;
+
+  animation:
+  twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+
+  from{
+    opacity:.2;
+    transform:scale(.8);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1.5);
+  }
+
+}
+
+/* ======================
+   流れ星
+====================== */
+
+.meteor{
+
+  position:fixed;
+
+  top:10%;
+  left:-200px;
+
+  width:250px;
+  height:2px;
+
+  background:
+  linear-gradient(
+    to right,
+    white,
+    transparent
+  );
+
+  transform:rotate(-20deg);
+
+  animation:
+  meteorMove 2s linear;
+
+}
+
+@keyframes meteorMove{
+
+  from{
+    left:-300px;
+    top:20%;
+  }
+
+  to{
+    left:120%;
+    top:70%;
+  }
+
+}
+
+/* ======================
+   時計
+====================== */
+
+.top-bar{
+
+  position:fixed;
+
+  top:20px;
+  left:50%;
+
+  transform:
+  translateX(-50%);
+
+  display:flex;
+  gap:20px;
+
+  z-index:50;
+}
+
+#clock,
+#weather,
+#moonPhase{
+
+  padding:
+  10px 16px;
+
+  border-radius:20px;
+
+  backdrop-filter:
+  blur(20px);
+
+  background:
+  rgba(255,255,255,.15);
+
+  color:white;
+
+  font-size:.9rem;
+
+  box-shadow:
+  0 0 15px rgba(255,255,255,.2);
+
+}
+
+/* ======================
+   電卓本体
+====================== */
+
+.calculator{
+
+  width:380px;
+
+  padding:25px;
+
+  border-radius:35px;
+
+  background:
+  rgba(255,255,255,.15);
+
+  backdrop-filter:
+  blur(30px);
+
+  box-shadow:
+  0 8px 40px rgba(0,0,0,.25),
+  0 0 40px rgba(255,180,255,.35);
+
+  position:relative;
+
+  overflow:hidden;
+
+  z-index:10;
+}
+
+/* ======================
+   ホログラム
+====================== */
+
+.hologram{
+
+  position:absolute;
+  inset:0;
+
+  background:
+  linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.2),
+    transparent
+  );
+
+  animation:
+  holoMove 8s linear infinite;
+
+  pointer-events:none;
+}
+
+@keyframes holoMove{
+
+  from{
+    transform:
+    translateX(-100%);
+  }
+
+  to{
+    transform:
+    translateX(100%);
+  }
+
+}
+
+/* ======================
+   AIメッセージ
+====================== */
+
+#assistant{
+
+  color:white;
+
+  text-align:center;
+
+  margin-bottom:15px;
+
+  font-size:.9rem;
+
+  opacity:.9;
+}
+
+/* ======================
+   ディスプレイ
+====================== */
+
+#display{
+
+  width:100%;
+
+  height:90px;
+
+  border-radius:20px;
+
+  background:
+  rgba(255,255,255,.2);
+
+  color:white;
+
+  display:flex;
+
+  justify-content:flex-end;
+  align-items:center;
+
+  padding:20px;
+
+  font-size:2rem;
+
+  overflow:hidden;
+
+  margin-bottom:20px;
+
+  box-shadow:
+  inset 0 0 15px rgba(255,255,255,.15);
+}
+
+/* ======================
+   ボタン
+====================== */
+
+.buttons{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(4,1fr);
+
+  gap:12px;
+}
+
+.btn{
+
+  height:65px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:
+  rgba(255,255,255,.18);
+
+  backdrop-filter:
+  blur(10px);
+
+  color:white;
+
+  font-size:1.2rem;
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.btn:hover{
+
+  transform:
+  translateY(-3px)
+  scale(1.05);
+
+  background:
+  rgba(255,255,255,.3);
+
+  box-shadow:
+  0 0 20px rgba(255,255,255,.8);
+}
+
+.btn:active{
+
+  transform:
+  scale(.95);
+}
+
+/* 演算子 */
+
+.operator{
+
+  background:
+  rgba(220,180,255,.35);
+}
+
+/* イコール */
+
+.equal{
+
+  background:
+  linear-gradient(
+    135deg,
+    #ffb3f4,
+    #c6a7ff
+  );
+
+  box-shadow:
+  0 0 25px
+  rgba(255,180,255,.8);
+}
+
+/* 0 */
+
+.zero{
+
+  grid-column:
+  span 2;
+}
+
+/* ======================
+   名言
+====================== */
+
+#quote{
+
+  margin-top:20px;
+
+  text-align:center;
+
+  color:white;
+
+  font-size:.85rem;
+
+  opacity:.8;
+}
+
+/* ======================
+   満月
+====================== */
+
+#moonGlow{
+
+  position:fixed;
+
+  top:80px;
+  right:50px;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  opacity:0;
+
+  transition:1s;
+
+  pointer-events:none;
+}
+
+.fullmoon{
+
+  opacity:1;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(255,240,100,.9),
+    rgba(255,240,100,.3),
+    transparent
+  );
+
+  animation:
+  moonPulse 5s infinite;
+}
+
+@keyframes moonPulse{
+
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.15);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+/* ======================
+   花火
+====================== */
+
+.firework{
+
+  position:absolute;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:white;
+
+  animation:
+  explode 1s forwards;
+}
+
+@keyframes explode{
+
+  from{
+    transform:scale(1);
+    opacity:1;
+  }
+
+  to{
+    transform:scale(15);
+    opacity:0;
+  }
+
+}
+
+/* ======================
+   パーティクル
+====================== */
+
+.sparkle{
+
+  position:absolute;
+
+  width:6px;
+  height:6px;
+
+  background:white;
+
+  border-radius:50%;
+
+  animation:
+  sparkle 1s forwards;
+}
+
+@keyframes sparkle{
+
+  from{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  to{
+    opacity:0;
+    transform:
+    translateY(-50px)
+    scale(0);
+  }
+
+}
+
+/* ======================
+   スマホ
+====================== */
+
+@media(max-width:500px){
+
+  .calculator{
+
+    width:95%;
+  }
+
+  .btn{
+
+    height:60px;
+  }
+
+  #display{
+
+    font-size:1.8rem;
+  }
+
+}
