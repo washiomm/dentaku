@@ -30,26 +30,27 @@ body{
   position:fixed;
   inset:0;
 
+  overflow:hidden;
+
   background:
   linear-gradient(
     135deg,
-    #ffd9f5,
-    #f5cbff,
-    #d8c8ff,
-    #ffcfe8,
-    #e9dbff
+    #ffd6f7,
+    #f2c8ff,
+    #dfc9ff,
+    #f8d6ff,
+    #e4d0ff
   );
 
   background-size:
-  500% 500%;
+  600% 600%;
 
   animation:
-  dreamyGradient 20s ease infinite;
+  dreamyGradient 25s ease infinite;
 
-  z-index:-20;
+  z-index:-30;
 
 }
-
 @keyframes dreamyGradient{
 
   0%{
