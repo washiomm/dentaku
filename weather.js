@@ -1,18 +1,28 @@
-/* ========================================
+/* ==========================================
+   和幸贈web
    weather.js
-   東京の実際の天気
-======================================== */
+========================================== */
 
-const weatherElement =
-document.getElementById("weather");
+const todayWeather =
+document.getElementById(
+  "todayWeather"
+);
 
-/*
-東京都の天気予報
-気象庁API
-130000 = 東京都
-*/
+const forecast =
+document.getElementById(
+  "forecast"
+);
 
-async function getTokyoWeather(){
+const sky =
+document.querySelector(
+  ".sky"
+);
+
+/* ==========================================
+   天気取得
+========================================== */
+
+async function getWeather(){
 
   try{
 
@@ -25,32 +35,53 @@ async function getTokyoWeather(){
     await response.json();
 
     const area =
-    data[0].timeSeries[0].areas[0];
+    data[0]
+    .timeSeries[0]
+    .areas[0];
 
-    const weather =
-    area.weathers[0];
+    const weathers =
+    area.weathers;
 
-    weatherElement.textContent =
-    "📍東京 " + weather;
+    const today =
+    weathers[0];
 
-    if(
-      weather.includes("雨")
-    ){
-      createRain();
-    }
+    const tomorrow =
+    weathers[1];
 
-    if(
-      weather.includes("雪")
-    ){
-      createSnow();
-    }
+    const dayAfter =
+    weathers[2];
+
+    todayWeather.innerHTML =
+    `
+    <div class="weather-main">
+      📍東京
+      <br>
+      ${today}
+    </div>
+    `;
+
+    forecast.innerHTML =
+    `
+    <div>
+      明日：${tomorrow}
+    </div>
+
+    <div>
+      明後日：${dayAfter}
+    </div>
+    `;
+
+    updateWeatherTheme(today);
 
   }
 
   catch(error){
 
-    weatherElement.textContent =
-    "天気取得失敗";
+    todayWeather.innerHTML =
+    `
+    天気情報を
+    取得できませんでした
+    `;
 
     console.error(error);
 
@@ -58,99 +89,230 @@ async function getTokyoWeather(){
 
 }
 
-getTokyoWeather();
+getWeather();
 
-const sky =
-document.querySelector(".sky");
+/* ==========================================
+   背景変更
+========================================== */
 
-if(weather.includes("雨")){
+function updateWeatherTheme(weather){
+
+  const now =
+  new Date();
+
+  const hour =
+  now.getHours();
+
+  const day =
+  now.getDay();
+
+  const isWeekend =
+  day === 0 || day === 6;
+
+  /* 雨 */
+
+  if(
+    weather.includes("雨")
+  ){
+
+    sky.style.background =
+    `
+    linear-gradient(
+      135deg,
+      #c7eaff,
+      #d8e8ff,
+      #bce5ff,
+      #d8f4ff,
+      #d9ddff
+    )
+    `;
+
+    createRain();
+
+    return;
+
+  }
+
+  /* 雪 */
+
+  if(
+    weather.includes("雪")
+  ){
+
+    sky.style.background =
+    `
+    linear-gradient(
+      135deg,
+      #f8fbff,
+      #eaf4ff,
+      #edf0ff,
+      #ffffff,
+      #dfe8ff
+    )
+    `;
+
+    createSnow();
+
+    return;
+
+  }
+
+  /* 曇り */
+
+  if(
+    weather.includes("曇")
+  ){
+
+    sky.style.background =
+    `
+    linear-gradient(
+      135deg,
+      #e7e7f1,
+      #dddfff,
+      #f1ebff,
+      #e2e2ee,
+      #d8d8e8
+    )
+    `;
+
+    return;
+
+  }
+
+  /* 晴れ＋夕方 */
+
+  if(
+    weather.includes("晴")
+    &&
+    hour >= 17
+    &&
+    hour <= 19
+  ){
+
+    sky.style.background =
+    `
+    linear-gradient(
+      135deg,
+      #ffcfab,
+      #ffc5d7,
+      #f4c3ff,
+      #d8c7ff,
+      #ffd9a7
+    )
+    `;
+
+    return;
+
+  }
+
+  /* 晴れ＋土日 */
+
+  if(
+    weather.includes("晴")
+    &&
+    isWeekend
+  ){
+
+    sky.style.background =
+    `
+    linear-gradient(
+      135deg,
+      #ffd8f5,
+      #fff5c6,
+      #c8fff0,
+      #d9c7ff,
+      #ffcde8
+    )
+    `;
+
+    return;
+
+  }
+
+  /* 通常 */
 
   sky.style.background =
   `
   linear-gradient(
-  135deg,
-  #c8f0ff,
-  #b6e7ff,
-  #d7d8ff,
-  #e5f6ff,
-  #d8eaff
+    135deg,
+    #ffd8f5,
+    #f2c6ff,
+    #d9c4ff,
+    #ffcce6,
+    #e4d6ff
   )
   `;
 
 }
-if(weather.includes("曇")){
 
-  sky.style.background =
-  `
-  linear-gradient(
-  135deg,
-  #e6e6ef,
-  #dcdcff,
-  #f4e9ff,
-  #d8d8e8
-  )
-  `;
+/* ==========================================
+   雨
+========================================== */
 
-}
-const hour =
-new Date().getHours();
-if(
- weather.includes("晴")
- &&
- hour >= 17
- &&
- hour <= 19
-){
+function createRain(){
 
- sky.style.background =
- `
- linear-gradient(
- 135deg,
- #ffcfb0,
- #ffc4d6,
- #f5c5ff,
- #d8c6ff,
- #ffd6a8
- )
- `;
+  setInterval(()=>{
 
-}
-if(
- weather.includes("晴")
- &&
- (hour < 17 || hour > 19)
-){
+    const rain =
+    document.createElement("div");
 
- sky.style.background =
- `
- linear-gradient(
- 135deg,
- #ffd8f5,
- #f2c6ff,
- #d9c4ff,
- #ffcce6,
- #e4d6ff
- )
- `;
+    rain.className =
+    "rain";
+
+    rain.style.left =
+    Math.random()*100+"vw";
+
+    rain.style.animationDuration =
+    0.5+
+    Math.random()*0.8
+    +"s";
+
+    document.body.appendChild(
+      rain
+    );
+
+    setTimeout(()=>{
+
+      rain.remove();
+
+    },2000);
+
+  },40);
 
 }
-if(
- weather.includes("晴")
- &&
- isWeekend
-){
 
- sky.style.background =
- `
- linear-gradient(
- 135deg,
- #ffd8f5,
- #f2c6ff,
- #d9c4ff,
- #c7fff2,
- #fff5c4,
- #ffcce6
- )
- `;
+/* ==========================================
+   雪
+========================================== */
+
+function createSnow(){
+
+  setInterval(()=>{
+
+    const snow =
+    document.createElement("div");
+
+    snow.className =
+    "snow";
+
+    snow.style.left =
+    Math.random()*100+"vw";
+
+    snow.style.animationDuration =
+    4+
+    Math.random()*4
+    +"s";
+
+    document.body.appendChild(
+      snow
+    );
+
+    setTimeout(()=>{
+
+      snow.remove();
+
+    },9000);
+
+  },180);
 
 }
