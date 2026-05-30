@@ -59,3 +59,98 @@ async function getTokyoWeather(){
 }
 
 getTokyoWeather();
+
+const sky =
+document.querySelector(".sky");
+
+if(weather.includes("雨")){
+
+  sky.style.background =
+  `
+  linear-gradient(
+  135deg,
+  #c8f0ff,
+  #b6e7ff,
+  #d7d8ff,
+  #e5f6ff,
+  #d8eaff
+  )
+  `;
+
+}
+if(weather.includes("曇")){
+
+  sky.style.background =
+  `
+  linear-gradient(
+  135deg,
+  #e6e6ef,
+  #dcdcff,
+  #f4e9ff,
+  #d8d8e8
+  )
+  `;
+
+}
+const hour =
+new Date().getHours();
+if(
+ weather.includes("晴")
+ &&
+ hour >= 17
+ &&
+ hour <= 19
+){
+
+ sky.style.background =
+ `
+ linear-gradient(
+ 135deg,
+ #ffcfb0,
+ #ffc4d6,
+ #f5c5ff,
+ #d8c6ff,
+ #ffd6a8
+ )
+ `;
+
+}
+if(
+ weather.includes("晴")
+ &&
+ (hour < 17 || hour > 19)
+){
+
+ sky.style.background =
+ `
+ linear-gradient(
+ 135deg,
+ #ffd8f5,
+ #f2c6ff,
+ #d9c4ff,
+ #ffcce6,
+ #e4d6ff
+ )
+ `;
+
+}
+if(
+ weather.includes("晴")
+ &&
+ isWeekend
+){
+
+ sky.style.background =
+ `
+ linear-gradient(
+ 135deg,
+ #ffd8f5,
+ #f2c6ff,
+ #d9c4ff,
+ #c7fff2,
+ #fff5c4,
+ #ffcce6
+ )
+ `;
+
+}
