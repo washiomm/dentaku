@@ -6,6 +6,43 @@
 
   <title>和幸贈web</title>
 
+  <!-- Adobe Fonts -->
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'pty4wqz',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,
+      t=setTimeout(function(){
+        h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";
+      },config.scriptTimeout),
+      tk=d.createElement("script"),
+      f=false,
+      s=d.getElementsByTagName("script")[0],
+      a;
+
+      h.className+=" wf-loading";
+
+      tk.src='https://use.typekit.net/'+config.kitId+'.js';
+      tk.async=true;
+
+      tk.onload=tk.onreadystatechange=function(){
+        a=this.readyState;
+        if(f||a&&a!="complete"&&a!="loaded") return;
+        f=true;
+        clearTimeout(t);
+
+        try{
+          Typekit.load(config);
+        }catch(e){}
+      };
+
+      s.parentNode.insertBefore(tk,s);
+    })(document);
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,105 +50,306 @@
   <!-- 背景 -->
   <div class="sky"></div>
   <div class="aurora"></div>
-
-  <!-- パーティクル -->
   <div id="particles"></div>
-
-  <!-- 星空 -->
   <div id="stars"></div>
-
-  <!-- 流れ星 -->
   <div id="meteors"></div>
-
-  <!-- 満月エフェクト -->
   <div id="moonGlow"></div>
 
-  <!-- 上部情報エリア -->
-  <div class="top-bar">
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <h1>和幸贈web</h1>
+  </header>
 
-    <div id="clock">
-      00:00:00
-    </div>
+  <!-- タブ -->
+  <nav class="tab-bar">
 
-    <div id="weather">
-      天気取得中...
-    </div>
+    <button class="tab-btn" data-page="0">🧮<span>電卓</span></button>
 
-    <div id="moonPhase">
-      🌙
-    </div>
+    <button class="tab-btn" data-page="1">🕒<span>時計</span></button>
 
-  </div>
+    <button class="tab-btn" data-page="2">☀️<span>天気</span></button>
 
-  <!-- 電卓本体 -->
-  <main class="calculator">
+    <button class="tab-btn" data-page="3">⏱️<span>タイマー</span></button>
 
-    <!-- ホログラム反射 -->
-    <div class="hologram"></div>
+    <button class="tab-btn" data-page="4">🌕<span>月</span></button>
 
-    <!-- AIメッセージ -->
-    <div id="assistant">
-      ✨ Welcome
-    </div>
+    <button class="tab-btn" data-page="5">🧭<span>方位磁針</span></button>
 
-    <!-- ディスプレイ -->
-    <div id="display">
-      0
-    </div>
+    <button class="tab-btn" data-page="6">📝<span>メモ</span></button>
 
-    <!-- ボタン -->
-    <div class="buttons">
+    <button class="tab-btn" data-page="7">🌸<span>季節</span></button>
 
-      <button class="btn function">C</button>
-      <button class="btn function">(</button>
-      <button class="btn function">)</button>
-      <button class="btn operator">/</button>
+    <button class="tab-btn" data-page="8">⭐<span>星座</span></button>
 
-      <button class="btn">7</button>
-      <button class="btn">8</button>
-      <button class="btn">9</button>
-      <button class="btn operator">*</button>
+    <button class="tab-btn" data-page="9">🚃<span>鉄道</span></button>
 
-      <button class="btn">4</button>
-      <button class="btn">5</button>
-      <button class="btn">6</button>
-      <button class="btn operator">−</button>
+  </nav>
 
-      <button class="btn">1</button>
-      <button class="btn">2</button>
-      <button class="btn">3</button>
-      <button class="btn operator">+</button>
+  <!-- 横スクロールエリア -->
+  <main class="dashboard" id="dashboard">
 
-      <button class="btn zero">0</button>
-      <button class="btn">.</button>
-      <button class="btn equal">=</button>
+    <!-- ====================== -->
+    <!-- 電卓 -->
+    <!-- ====================== -->
 
-    </div>
+    <section class="page">
 
-    <!-- 名言表示 -->
-    <div id="quote">
-      Dream Big ✨
-    </div>
+      <div class="glass-card">
+
+        <h2>電卓</h2>
+
+        <div id="assistant">
+          ✨ようこそ
+        </div>
+
+        <div id="display">0</div>
+
+        <div class="buttons">
+
+          <button class="btn function">C</button>
+          <button class="btn function">(</button>
+          <button class="btn function">)</button>
+          <button class="btn operator">÷</button>
+
+          <button class="btn">7</button>
+          <button class="btn">8</button>
+          <button class="btn">9</button>
+          <button class="btn operator">×</button>
+
+          <button class="btn">4</button>
+          <button class="btn">5</button>
+          <button class="btn">6</button>
+          <button class="btn operator">−</button>
+
+          <button class="btn">1</button>
+          <button class="btn">2</button>
+          <button class="btn">3</button>
+          <button class="btn operator">+</button>
+
+          <button class="btn zero">0</button>
+          <button class="btn">.</button>
+          <button class="btn equal">=</button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 時計 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>時計</h2>
+
+        <canvas id="analogClock"
+                width="300"
+                height="300"></canvas>
+
+        <div id="digitalClock">
+          00:00:00
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 天気 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>東京の天気</h2>
+
+        <div id="todayWeather">
+          取得中...
+        </div>
+
+        <div id="forecast">
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- タイマー -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>タイマー</h2>
+
+        <div id="timerDisplay">
+          00:00
+        </div>
+
+        <div class="timer-buttons">
+
+          <button id="startTimer">
+            開始
+          </button>
+
+          <button id="stopTimer">
+            停止
+          </button>
+
+          <button id="resetTimer">
+            リセット
+          </button>
+
+        </div>
+
+        <hr>
+
+        <h2>ストップウォッチ</h2>
+
+        <div id="stopwatchDisplay">
+          00:00.00
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 月 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>月の情報</h2>
+
+        <div id="moonEmoji">
+          🌕
+        </div>
+
+        <div id="moonName">
+          満月
+        </div>
+
+        <div id="moonAge">
+          月齢取得中...
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 方位磁針 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>方位磁針</h2>
+
+        <div id="compassArrow">
+          ↑
+        </div>
+
+        <div id="direction">
+          北
+        </div>
+
+        <div id="degrees">
+          0°
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- メモ -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>メモ帳</h2>
+
+        <textarea
+          id="memo"
+          placeholder="ここにメモを書けます"
+        ></textarea>
+
+      </div>
+
+    </section>
+
+    <!-- 季節 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>季節情報</h2>
+
+        <div id="seasonInfo">
+          読み込み中...
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 星座 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>今日の星座</h2>
+
+        <div id="zodiacSymbol">
+          ♈
+        </div>
+
+        <div id="zodiacName">
+          おひつじ座
+        </div>
+
+        <div id="zodiacDescription">
+          読み込み中...
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 鉄道 -->
+
+    <section class="page">
+
+      <div class="glass-card">
+
+        <h2>鉄道運行情報</h2>
+
+        <div id="railwayInfo">
+
+          平常運転の場合は表示しません
+
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
 
-  <!-- 花火 -->
-  <div id="fireworks"></div>
-
-  <!-- 季節エフェクト -->
-  <div id="seasonEffects"></div>
-
-  <!-- 効果音 -->
+  <!-- 音声 -->
   <audio id="clickSound" preload="auto">
     <source src="assets/click.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- BGM -->
-  <audio id="bgm" loop preload="auto">
+  <audio id="bgm" preload="auto" loop>
     <source src="assets/bgm.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- JavaScript -->
+  <!-- JS -->
   <script src="script.js"></script>
   <script src="weather.js"></script>
   <script src="moon.js"></script>
