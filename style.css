@@ -37,27 +37,57 @@ body{
 ====================== */
 
 .sky{
+
   position:fixed;
   inset:0;
 
   background:
   linear-gradient(
-    -45deg,
-    #ffd7f6,
-    #f5cfff,
-    #d7c9ff,
-    #ffcbe9
+    135deg,
+    #ffd8f5,
+    #f2c6ff,
+    #d9c4ff,
+    #ffcce6,
+    #e4d6ff
   );
 
   background-size:
-  400% 400%;
+  500% 500%;
 
   animation:
-  skyMove 18s ease infinite;
+  dreamyGradient 20s ease infinite;
 
-  z-index:-10;
+  z-index:-20;
+
 }
+@keyframes dreamyGradient{
 
+  0%{
+    background-position:
+    0% 50%;
+  }
+
+  25%{
+    background-position:
+    50% 100%;
+  }
+
+  50%{
+    background-position:
+    100% 50%;
+  }
+
+  75%{
+    background-position:
+    50% 0%;
+  }
+
+  100%{
+    background-position:
+    0% 50%;
+  }
+
+}
 @keyframes skyMove{
 
   0%{
@@ -79,36 +109,20 @@ body{
 ====================== */
 
 .aurora{
+
   position:fixed;
-  inset:-200px;
+  inset:-300px;
 
-  background:
-  radial-gradient(
-    circle at 20% 30%,
-    rgba(255,180,255,.35),
-    transparent 40%
-  ),
-
-  radial-gradient(
-    circle at 70% 40%,
-    rgba(180,220,255,.25),
-    transparent 45%
-  ),
-
-  radial-gradient(
-    circle at 50% 80%,
-    rgba(255,220,180,.25),
-    transparent 45%
-  );
+  pointer-events:none;
 
   filter:blur(120px);
 
   animation:
-  auroraMove 15s ease infinite;
+  auroraMove 25s ease infinite;
 
-  z-index:-9;
+  z-index:-19;
+
 }
-
 @keyframes auroraMove{
 
   0%{
@@ -704,5 +718,49 @@ body{
     transform:
     translateY(110vh);
   }
+
+}
+
+.aurora::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:900px;
+  height:900px;
+
+  background:
+
+  radial-gradient(
+    circle,
+    rgba(255,180,255,.35),
+    transparent 70%
+  );
+
+  left:10%;
+  top:10%;
+
+}
+
+.aurora::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:800px;
+  height:800px;
+
+  background:
+
+  radial-gradient(
+    circle,
+    rgba(210,180,255,.35),
+    transparent 70%
+  );
+
+  right:5%;
+  bottom:5%;
 
 }
