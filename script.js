@@ -226,24 +226,23 @@ setInterval(
 
 const quotes = [
 
-  "Dream Big ✨",
+  "夢は大きく ✨",
 
-  "Believe In Magic 🌙",
+  "今日も素敵な一日を 🌸",
 
-  "The Sky Is Not The Limit ☁️",
+  "星のように輝こう ⭐",
 
-  "Make Today Beautiful 🌸",
+  "ゆっくり前へ進もう 🌙",
 
-  "Follow The Stars ⭐",
+  "未来はきっと明るい ☀️",
 
-  "Keep Shining 💖",
+  "自分を信じて 💖",
 
-  "Everything Starts Here 🌈",
+  "空はどこまでも続いている ☁️",
 
-  "Your Future Is Bright ☀️"
+  "新しい可能性が待っている 🌈"
 
 ];
-
 function changeQuote(){
 
   quote.textContent =
