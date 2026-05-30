@@ -300,20 +300,26 @@ body{
 
 .dashboard{
 
+  position:relative;
+
   display:flex;
 
-  width:1000vw;
+  flex-direction:row;
+
+  width:100vw;
 
   height:100vh;
 
   overflow-x:auto;
+  overflow-y:hidden;
 
   scroll-snap-type:x mandatory;
 
   scroll-behavior:smooth;
 
-}
+  -webkit-overflow-scrolling:touch;
 
+}
 .dashboard::-webkit-scrollbar{
   display:none;
 }
