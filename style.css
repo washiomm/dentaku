@@ -648,3 +648,61 @@ body{
   }
 
 }
+
+.rain{
+
+  position:fixed;
+
+  width:2px;
+  height:20px;
+
+  background:white;
+
+  opacity:.5;
+
+  animation:
+  rainFall linear;
+}
+
+@keyframes rainFall{
+
+  from{
+    transform:
+    translateY(-50px);
+  }
+
+  to{
+    transform:
+    translateY(110vh);
+  }
+
+}
+
+.snow{
+
+  position:fixed;
+
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:white;
+
+  animation:
+  snowFall linear;
+}
+
+@keyframes snowFall{
+
+  from{
+    transform:
+    translateY(-50px);
+  }
+
+  to{
+    transform:
+    translateY(110vh);
+  }
+
+}
