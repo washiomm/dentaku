@@ -375,7 +375,7 @@ function checkSecretModes(result){
   if(result === "777"){
 
     assistant.textContent =
-      "🌈 Rainbow Mode Activated!";
+      "🌈 レインボーモード発動！";
 
     document.body.style.filter =
       "hue-rotate(90deg)";
@@ -385,7 +385,7 @@ function checkSecretModes(result){
   if(result === "9999"){
 
     assistant.textContent =
-      "☄️ Meteor Shower Activated!";
+      "☄️ 流星群モード発動！";
 
     for(let i=0;i<30;i++){
 
@@ -402,7 +402,7 @@ function checkSecretModes(result){
   if(result === "314159"){
 
     assistant.textContent =
-      "🚀 Space Mode Activated!";
+      "🚀 宇宙モード発動！";
 
     document.querySelector(".sky")
       .style.background =
