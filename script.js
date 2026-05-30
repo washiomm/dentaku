@@ -1,213 +1,265 @@
-/* ========================================
-   Dream Calculator Ultimate
+/* ==========================================
+   和幸贈web
    script.js
-======================================== */
+========================================== */
 
-/* -------------------------
-   要素取得
-------------------------- */
+/* ==========================================
+   タブ移動
+========================================== */
 
-const display = document.getElementById("display");
-const buttons = document.querySelectorAll(".btn");
-const quote = document.getElementById("quote");
-const assistant = document.getElementById("assistant");
-const fireworks = document.getElementById("fireworks");
+const dashboard =
+document.getElementById(
+  "dashboard"
+);
 
-let expression = "";
+const tabs =
+document.querySelectorAll(
+  ".tab-btn"
+);
 
-/* -------------------------
-   電卓
-------------------------- */
+const pages =
+document.querySelectorAll(
+  ".page"
+);
 
-buttons.forEach(button => {
+tabs.forEach(tab=>{
 
-  button.addEventListener("click", () => {
+  tab.addEventListener(
+    "click",
+    ()=>{
 
-    const value = button.textContent;
+      const index =
+      Number(
+        tab.dataset.page
+      );
 
-    playClickEffect(button);
+      dashboard.scrollTo({
 
-    if (value === "C") {
+        left:
+        window.innerWidth
+        * index,
 
-      expression = "";
-      display.textContent = "0";
+        behavior:"smooth"
 
-      return;
+      });
+
     }
-
-    if (value === "=") {
-
-      calculate();
-
-      return;
-    }
-
-    addValue(value);
-
-  });
+  );
 
 });
 
-/* -------------------------
-   入力
-------------------------- */
+/* ==========================================
+   タブ追従
+========================================== */
+
+dashboard.addEventListener(
+  "scroll",
+  ()=>{
+
+    const index =
+    Math.round(
+      dashboard.scrollLeft
+      /
+      window.innerWidth
+    );
+
+    tabs.forEach(
+      tab=>
+      tab.classList.remove(
+        "active"
+      )
+    );
+
+    if(tabs[index]){
+
+      tabs[index]
+      .classList.add(
+        "active"
+      );
+
+    }
+
+  }
+);
+
+tabs[0].classList.add(
+  "active"
+);
+
+/* ==========================================
+   電卓
+========================================== */
+
+const display =
+document.getElementById(
+  "display"
+);
+
+let expression = "";
+
+document
+.querySelectorAll(".btn")
+.forEach(button=>{
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      const value =
+      button.textContent;
+
+      if(value==="C"){
+
+        expression="";
+
+        display.textContent=
+        "0";
+
+        return;
+
+      }
+
+      if(value==="="){
+
+        calculate();
+
+        return;
+
+      }
+
+      addValue(value);
+
+    }
+  );
+
+});
 
 function addValue(value){
 
-  let converted = value;
+  let converted =
+  value;
 
-  if(value === "×") converted = "*";
-  if(value === "÷") converted = "/";
-  if(value === "−") converted = "-";
+  if(value==="×"){
+    converted="*";
+  }
+
+  if(value==="÷"){
+    converted="/";
+  }
+
+  if(value==="−"){
+    converted="-";
+  }
 
   expression += converted;
 
-  display.textContent = expression;
-
-  createSparkles();
+  display.textContent =
+  expression;
 
 }
-
-/* -------------------------
-   計算
-------------------------- */
 
 function calculate(){
 
   try{
 
-    const result = eval(expression);
+    const result =
+    eval(expression);
 
-    expression = result.toString();
+    expression =
+    String(result);
 
-    display.textContent = expression;
+    display.textContent =
+    expression;
 
-    display.classList.add("result");
+  }
 
-    createSparkles();
+  catch{
 
-    checkSecretModes(expression);
+    display.textContent =
+    "エラー";
 
-    if(Number(result) >= 1000){
-      launchFireworks();
+    expression="";
+
+  }
+
+}
+
+/* ==========================================
+   キーボード入力
+========================================== */
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    const key =
+    event.key;
+
+    if(
+      "0123456789+-*/()."
+      .includes(key)
+    ){
+
+      expression += key;
+
+      display.textContent =
+      expression;
+
+    }
+
+    if(
+      key==="Enter"
+    ){
+
+      calculate();
+
+    }
+
+    if(
+      key==="Escape"
+    ){
+
+      expression="";
+
+      display.textContent=
+      "0";
+
     }
 
   }
+);
 
-  catch(error){
+/* ==========================================
+   デジタル時計
+========================================== */
 
-    display.textContent = "Error";
-
-    expression = "";
-
-  }
-
-}
-
-/* -------------------------
-   ボタン演出
-------------------------- */
-
-function playClickEffect(button){
-
-  button.animate(
-    [
-      {transform:"scale(1)"},
-      {transform:"scale(0.92)"},
-      {transform:"scale(1)"}
-    ],
-    {
-      duration:180
-    }
-  );
-
-}
-
-/* -------------------------
-   キラキラ
-------------------------- */
-
-function createSparkles(){
-
-  const calc = document.querySelector(".calculator");
-
-  for(let i=0;i<10;i++){
-
-    const sparkle =
-      document.createElement("div");
-
-    sparkle.className = "sparkle";
-
-    sparkle.style.left =
-      Math.random()*100 + "%";
-
-    sparkle.style.top =
-      Math.random()*100 + "%";
-
-    calc.appendChild(sparkle);
-
-    setTimeout(() => {
-      sparkle.remove();
-    },1000);
-
-  }
-
-}
-
-/* -------------------------
-   花火
-------------------------- */
-
-function launchFireworks(){
-
-  for(let i=0;i<20;i++){
-
-    const firework =
-      document.createElement("div");
-
-    firework.className =
-      "firework";
-
-    firework.style.left =
-      Math.random()*100 + "vw";
-
-    firework.style.top =
-      Math.random()*100 + "vh";
-
-    fireworks.appendChild(firework);
-
-    setTimeout(()=>{
-      firework.remove();
-    },1000);
-
-  }
-
-}
-
-/* -------------------------
-   時計
-------------------------- */
+const digitalClock =
+document.getElementById(
+  "digitalClock"
+);
 
 function updateClock(){
 
-  const now = new Date();
+  const now =
+  new Date();
 
   const h =
-    String(now.getHours()).padStart(2,"0");
+  String(
+    now.getHours()
+  ).padStart(2,"0");
 
   const m =
-    String(now.getMinutes()).padStart(2,"0");
+  String(
+    now.getMinutes()
+  ).padStart(2,"0");
 
   const s =
-    String(now.getSeconds()).padStart(2,"0");
+  String(
+    now.getSeconds()
+  ).padStart(2,"0");
 
-  const clock =
-    document.getElementById("clock");
-
-  if(clock){
-clock.textContent =
-`${h}時${m}分${s}秒`;
-  }
+  digitalClock.textContent =
+  `${h}:${m}:${s}`;
 
 }
 
@@ -218,243 +270,326 @@ setInterval(
   1000
 );
 
-/* -------------------------
-   名言
-------------------------- */
+/* ==========================================
+   アナログ時計
+========================================== */
 
-const quotes = [
-
-  "夢は大きく ✨",
-
-  "今日も素敵な一日を 🌸",
-
-  "星のように輝こう ⭐",
-
-  "ゆっくり前へ進もう 🌙",
-
-  "未来はきっと明るい ☀️",
-
-  "自分を信じて 💖",
-
-  "空はどこまでも続いている ☁️",
-
-  "新しい可能性が待っている 🌈"
-
-];
-function changeQuote(){
-
-  quote.textContent =
-    quotes[
-      Math.floor(
-        Math.random()*quotes.length
-      )
-    ];
-
-}
-
-changeQuote();
-
-setInterval(
-  changeQuote,
-  10000
+const canvas =
+document.getElementById(
+  "analogClock"
 );
 
-/* -------------------------
-   AIメッセージ
-------------------------- */
+const ctx =
+canvas.getContext("2d");
 
-function updateAssistant(){
+function drawClock(){
 
-  const hour =
-    new Date().getHours();
+  const now =
+  new Date();
 
-  if(hour >= 5 && hour < 11){
+  const w =
+  canvas.width;
 
-    assistant.textContent =
-      "☀️ おはようございます";
+  const h =
+  canvas.height;
 
-  }
+  const r =
+  w/2;
 
-  else if(hour < 17){
-
-    assistant.textContent =
-      "🌸 素敵な一日を";
-
-  }
-
-  else if(hour < 20){
-
-    assistant.textContent =
-      "🌇 夕暮れの時間です";
-
-  }
-
-  else{
-
-    assistant.textContent =
-      "🌙 夜空が綺麗ですね";
-
-  }
-
-}
-
-updateAssistant();
-
-/* -------------------------
-   星空生成
-------------------------- */
-
-function createStars(){
-
-  const stars =
-    document.getElementById("stars");
-
-  if(!stars) return;
-
-  for(let i=0;i<150;i++){
-
-    const star =
-      document.createElement("div");
-
-    star.className = "star";
-
-    star.style.left =
-      Math.random()*100 + "vw";
-
-    star.style.top =
-      Math.random()*100 + "vh";
-
-    star.style.animationDelay =
-      Math.random()*4 + "s";
-
-    stars.appendChild(star);
-
-  }
-
-}
-
-createStars();
-
-/* -------------------------
-   流れ星
-------------------------- */
-
-function createMeteor(){
-
-  const meteor =
-    document.createElement("div");
-
-  meteor.className =
-    "meteor";
-
-  document.body.appendChild(
-    meteor
+  ctx.clearRect(
+    0,
+    0,
+    w,
+    h
   );
 
-  setTimeout(()=>{
-    meteor.remove();
-  },2000);
+  ctx.save();
+
+  ctx.translate(
+    r,
+    r
+  );
+
+  ctx.beginPath();
+
+  ctx.arc(
+    0,
+    0,
+    r-10,
+    0,
+    Math.PI*2
+  );
+
+  ctx.strokeStyle=
+  "white";
+
+  ctx.lineWidth=4;
+
+  ctx.stroke();
+
+  for(
+    let i=0;
+    i<12;
+    i++
+  ){
+
+    const angle =
+    i*Math.PI/6;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      Math.cos(angle)*(r-30),
+      Math.sin(angle)*(r-30)
+    );
+
+    ctx.lineTo(
+      Math.cos(angle)*(r-15),
+      Math.sin(angle)*(r-15)
+    );
+
+    ctx.stroke();
+
+  }
+
+  const sec =
+  now.getSeconds();
+
+  const min =
+  now.getMinutes();
+
+  const hour =
+  now.getHours()%12;
+
+  drawHand(
+    (hour+min/60)
+    *Math.PI/6,
+    r*0.5,
+    6
+  );
+
+  drawHand(
+    (min+sec/60)
+    *Math.PI/30,
+    r*0.7,
+    4
+  );
+
+  drawHand(
+    sec*Math.PI/30,
+    r*0.8,
+    2
+  );
+
+  ctx.restore();
 
 }
 
-setInterval(()=>{
+function drawHand(
+  angle,
+  length,
+  width
+){
 
-  createMeteor();
+  ctx.beginPath();
 
-},8000);
+  ctx.lineWidth=
+  width;
 
-/* -------------------------
-   隠しコマンド
-------------------------- */
+  ctx.strokeStyle=
+  "white";
 
-function checkSecretModes(result){
+  ctx.moveTo(0,0);
 
-  if(result === "777"){
+  ctx.lineTo(
 
-    assistant.textContent =
-      "🌈 レインボーモード発動！";
+    Math.cos(
+      angle-Math.PI/2
+    )*length,
 
-    document.body.style.filter =
-      "hue-rotate(90deg)";
+    Math.sin(
+      angle-Math.PI/2
+    )*length
 
-  }
+  );
 
-  if(result === "9999"){
-
-    assistant.textContent =
-      "☄️ 流星群モード発動！";
-
-    for(let i=0;i<30;i++){
-
-      setTimeout(()=>{
-
-        createMeteor();
-
-      },i*150);
-
-    }
-
-  }
-
-  if(result === "314159"){
-
-    assistant.textContent =
-      "🚀 宇宙モード発動！";
-
-    document.querySelector(".sky")
-      .style.background =
-      "linear-gradient(180deg,#000000,#091540,#28145c)";
-
-  }
+  ctx.stroke();
 
 }
 
-/* -------------------------
-   キーボード対応
-------------------------- */
+setInterval(
+  drawClock,
+  1000
+);
 
-document.addEventListener(
-  "keydown",
-  (event)=>{
+drawClock();
 
-    const key = event.key;
+/* ==========================================
+   タイマー
+========================================== */
 
-    if(
-      "0123456789+-*/()."
-      .includes(key)
-    ){
+let timerInterval;
 
-      expression += key;
+let timerSeconds =
+0;
 
-      display.textContent =
-        expression;
+const timerDisplay =
+document.getElementById(
+  "timerDisplay"
+);
 
-    }
+document
+.getElementById(
+  "startTimer"
+)
+.addEventListener(
+  "click",
+  ()=>{
 
-    if(key === "Enter"){
+    clearInterval(
+      timerInterval
+    );
 
-      calculate();
+    timerInterval =
+    setInterval(()=>{
 
-    }
+      timerSeconds++;
 
-    if(key === "Escape"){
+      updateTimer();
 
-      expression = "";
-
-      display.textContent = "0";
-
-    }
+    },1000);
 
   }
 );
 
-/* -------------------------
-   起動メッセージ
-------------------------- */
+document
+.getElementById(
+  "stopTimer"
+)
+.addEventListener(
+  "click",
+  ()=>{
 
-setTimeout(()=>{
+    clearInterval(
+      timerInterval
+    );
 
-  assistant.textContent =
-    "✨ 夢の電卓、準備完了";
+  }
+);
 
-},1500);
+document
+.getElementById(
+  "resetTimer"
+)
+.addEventListener(
+  "click",
+  ()=>{
+
+    clearInterval(
+      timerInterval
+    );
+
+    timerSeconds=0;
+
+    updateTimer();
+
+  }
+);
+
+function updateTimer(){
+
+  const min =
+  Math.floor(
+    timerSeconds/60
+  );
+
+  const sec =
+  timerSeconds%60;
+
+  timerDisplay.textContent=
+
+  `${String(min)
+  .padStart(2,"0")}:${
+  String(sec)
+  .padStart(2,"0")}`;
+
+}
+
+updateTimer();
+
+/* ==========================================
+   ストップウォッチ
+========================================== */
+
+let swInterval;
+
+let swTime = 0;
+
+const swDisplay =
+document.getElementById(
+  "stopwatchDisplay"
+);
+
+/* 自動開始 */
+
+swInterval =
+setInterval(()=>{
+
+  swTime++;
+
+  const min =
+  Math.floor(
+    swTime/6000
+  );
+
+  const sec =
+  Math.floor(
+    (swTime%6000)/100
+  );
+
+  const cs =
+  swTime%100;
+
+  swDisplay.textContent =
+
+  `${String(min)
+  .padStart(2,"0")}:${
+  String(sec)
+  .padStart(2,"0")}.${String(cs)
+  .padStart(2,"0")}`;
+
+},10);
+
+/* ==========================================
+   メモ帳
+========================================== */
+
+const memo =
+document.getElementById(
+  "memo"
+);
+
+if(memo){
+
+  memo.value =
+
+  localStorage.getItem(
+    "wakouMemo"
+  ) || "";
+
+  memo.addEventListener(
+    "input",
+    ()=>{
+
+      localStorage.setItem(
+
+        "wakouMemo",
+
+        memo.value
+
+      );
+
+    }
+  );
+
+}
