@@ -455,6 +455,6 @@ document.addEventListener(
 setTimeout(()=>{
 
   assistant.textContent =
-    "✨ Dream Calculator Ready";
+    "✨ 夢の電卓、準備完了";
 
 },1500);
