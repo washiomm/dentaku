@@ -690,3 +690,79 @@ body{
   }
 
 }
+/* ==========================================
+   コンパス
+========================================== */
+
+#compassContainer{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  margin:20px 0;
+
+}
+
+#compassArrow{
+
+  font-size:7rem;
+
+  transition:
+  transform .3s linear;
+
+  text-shadow:
+  0 0 20px rgba(255,255,255,.5);
+
+}
+
+#direction{
+
+  text-align:center;
+
+  font-size:2rem;
+
+  margin-top:10px;
+
+}
+
+#degrees{
+
+  text-align:center;
+
+  font-size:1.3rem;
+
+  opacity:.85;
+
+}
+
+#compassPermissionBtn{
+
+  display:block;
+
+  margin:25px auto;
+
+  border:none;
+
+  border-radius:18px;
+
+  padding:12px 24px;
+
+  cursor:pointer;
+
+  background:
+  rgba(255,255,255,.18);
+
+  color:white;
+
+}
+
+#compassStatus{
+
+  text-align:center;
+
+  opacity:.8;
+
+}
