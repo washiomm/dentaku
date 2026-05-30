@@ -617,3 +617,34 @@ body{
   }
 
 }
+.bg-particle{
+
+  position:fixed;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:
+  rgba(255,255,255,.8);
+
+  pointer-events:none;
+
+  animation:
+  particleFloat linear;
+}
+
+@keyframes particleFloat{
+
+  from{
+    transform:
+    translateY(0);
+  }
+
+  to{
+    transform:
+    translateY(-130vh);
+  }
+
+}
