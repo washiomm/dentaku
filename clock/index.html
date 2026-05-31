@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>時計 | 和幸贈web</title>
+
+<!-- Adobe Fonts -->
+<script>
+(function(d) {
+  var config = {
+    kitId: 'pty4wqz',
+    scriptTimeout: 3000,
+    async: true
+  },
+  h=d.documentElement,
+  t=setTimeout(function(){
+    h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";
+  },config.scriptTimeout),
+  tk=d.createElement("script"),
+  f=false,
+  s=d.getElementsByTagName("script")[0],
+  a;
+
+  h.className+=" wf-loading";
+
+  tk.src='https://use.typekit.net/'+config.kitId+'.js';
+  tk.async=true;
+
+  tk.onload=tk.onreadystatechange=function(){
+    a=this.readyState;
+    if(f||a&&a!="complete"&&a!="loaded") return;
+    f=true;
+    clearTimeout(t);
+    try{Typekit.load(config)}catch(e){}
+  };
+
+  s.parentNode.insertBefore(tk,s);
+})(document);
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 背景演出 -->
+<div id="effects"></div>
+
+<div class="clock-card">
+
+  <h1>🕒 和幸贈web 時計</h1>
+
+  <div id="date" class="date">
+    読み込み中...
+  </div>
+
+  <div id="digital" class="digital">
+    00:00:00
+  </div>
+
+  <!-- アナログ時計 -->
+  <div class="analog">
+
+    <div class="mark mark12">12</div>
+    <div class="mark mark3">3</div>
+    <div class="mark mark6">6</div>
+    <div class="mark mark9">9</div>
+
+    <div id="hour" class="hand hour"></div>
+    <div id="minute" class="hand minute"></div>
+    <div id="second" class="hand second"></div>
+
+    <div class="center-dot"></div>
+
+  </div>
+
+  <div class="info">
+
+    <div id="seasonInfo">
+      季節取得中...
+    </div>
+
+    <div id="weatherInfo">
+      天気取得中...
+    </div>
+
+  </div>
+
+  <a href="../" class="back-btn">
+    ← トップへ戻る
+  </a>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
