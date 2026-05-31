@@ -1,0 +1,506 @@
+/* =========================
+   和幸贈web 時計
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:30px;
+
+  color:white;
+
+  font-family:
+  "fot-tsukuardgothic-std",
+  sans-serif;
+
+  background:
+  linear-gradient(
+    135deg,
+    #ffd6f7,
+    #f1c9ff,
+    #d7d1ff,
+    #ffc8ef,
+    #e5d2ff
+  );
+
+  background-size:
+  700% 700%;
+
+  animation:
+  aurora 25s ease infinite;
+
+  position:relative;
+}
+
+/* =========================
+   オーロラ背景
+========================= */
+
+@keyframes aurora{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+/* =========================
+   ガラスカード
+========================= */
+
+.clock-card{
+
+  width:min(900px,95vw);
+
+  padding:35px;
+
+  border-radius:42px;
+
+  background:
+  rgba(255,255,255,.18);
+
+  backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  -webkit-backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  border:
+  1px solid
+  rgba(255,255,255,.25);
+
+  box-shadow:
+  0 20px 60px
+  rgba(120,80,255,.18);
+
+  text-align:center;
+
+}
+
+/* =========================
+   タイトル
+========================= */
+
+h1{
+
+  font-size:2rem;
+
+  margin-bottom:15px;
+
+}
+
+/* =========================
+   日付
+========================= */
+
+.date{
+
+  font-size:1.1rem;
+
+  opacity:.95;
+
+  margin-bottom:15px;
+
+}
+
+/* =========================
+   デジタル時計
+========================= */
+
+.digital{
+
+  font-size:clamp(
+    2rem,
+    8vw,
+    4rem
+  );
+
+  font-weight:700;
+
+  letter-spacing:3px;
+
+  margin-bottom:35px;
+
+  text-shadow:
+  0 0 20px
+  rgba(255,255,255,.35);
+
+}
+
+/* =========================
+   アナログ時計
+========================= */
+
+.analog{
+
+  width:320px;
+  height:320px;
+
+  margin:auto;
+
+  position:relative;
+
+  border-radius:50%;
+
+  background:
+  rgba(255,255,255,.22);
+
+  backdrop-filter:
+  blur(20px);
+
+  border:
+  1px solid
+  rgba(255,255,255,.3);
+
+  box-shadow:
+  inset 0 0 20px
+  rgba(255,255,255,.2),
+  0 10px 30px
+  rgba(0,0,0,.08);
+
+}
+
+/* =========================
+   文字盤
+========================= */
+
+.mark{
+
+  position:absolute;
+
+  font-size:1.2rem;
+
+  font-weight:bold;
+
+}
+
+.mark12{
+  top:15px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.mark3{
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.mark6{
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.mark9{
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+/* =========================
+   針
+========================= */
+
+.hand{
+
+  position:absolute;
+
+  left:50%;
+
+  transform-origin:
+  bottom center;
+
+  border-radius:999px;
+
+}
+
+/* 時針 */
+
+.hour{
+
+  width:8px;
+
+  height:80px;
+
+  background:white;
+
+  bottom:50%;
+
+  margin-left:-4px;
+
+}
+
+/* 分針 */
+
+.minute{
+
+  width:6px;
+
+  height:115px;
+
+  background:white;
+
+  bottom:50%;
+
+  margin-left:-3px;
+
+}
+
+/* 秒針 */
+
+.second{
+
+  width:3px;
+
+  height:130px;
+
+  background:#ff4d8d;
+
+  bottom:50%;
+
+  margin-left:-1.5px;
+
+}
+
+/* 中心 */
+
+.center-dot{
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:white;
+
+  position:absolute;
+
+  top:50%;
+  left:50%;
+
+  transform:
+  translate(-50%,-50%);
+
+}
+
+/* =========================
+   情報欄
+========================= */
+
+.info{
+
+  margin-top:30px;
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:20px;
+
+  flex-wrap:wrap;
+
+}
+
+.info div{
+
+  padding:10px 18px;
+
+  border-radius:999px;
+
+  background:
+  rgba(255,255,255,.15);
+
+}
+
+/* =========================
+   戻るボタン
+========================= */
+
+.back-btn{
+
+  display:inline-block;
+
+  margin-top:30px;
+
+  text-decoration:none;
+
+  color:white;
+
+  font-weight:bold;
+
+}
+
+.back-btn:hover{
+
+  text-decoration:underline;
+
+}
+
+/* =========================
+   季節パーティクル
+========================= */
+
+.season-particle{
+
+  position:fixed;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  z-index:9999;
+
+  animation:
+  floatParticle
+  8s linear forwards;
+
+}
+
+@keyframes floatParticle{
+
+  from{
+    transform:
+    translateY(0);
+  }
+
+  to{
+    transform:
+    translateY(-180px);
+    opacity:0;
+  }
+
+}
+
+/* =========================
+   雨
+========================= */
+
+.rain{
+
+  position:fixed;
+
+  top:-20px;
+
+  width:4px;
+  height:16px;
+
+  border-radius:999px;
+
+  background:#7ecfff;
+
+  pointer-events:none;
+
+  animation:
+  rainFall
+  3s linear forwards;
+
+}
+
+@keyframes rainFall{
+
+  to{
+    transform:
+    translateY(120vh);
+  }
+
+}
+
+/* =========================
+   ゾロ目演出
+========================= */
+
+body.lucky{
+
+  background:#ffe34a !important;
+
+}
+
+/* =========================
+   深夜演出
+========================= */
+
+.midnight{
+
+  position:fixed;
+
+  left:-20px;
+
+  width:12px;
+  height:12px;
+
+  border-radius:50%;
+
+  background:red;
+
+  animation:
+  midnightMove
+  5s linear forwards;
+
+}
+
+@keyframes midnightMove{
+
+  to{
+    left:110vw;
+  }
+
+}
+
+/* =========================
+   スマホ
+========================= */
+
+@media(max-width:768px){
+
+  .clock-card{
+
+    padding:20px;
+
+  }
+
+  .analog{
+
+    width:260px;
+    height:260px;
+
+  }
+
+  .digital{
+
+    font-size:2.4rem;
+
+  }
+
+}
