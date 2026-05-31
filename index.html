@@ -1,72 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>和幸贈web</title>
-
-  <!-- Adobe Fonts -->
-  <script>
-    (function(d) {
-      var config = {
-        kitId: 'pty4wqz',
-        scriptTimeout: 3000,
-        async: true
-      },
-      h=d.documentElement,
-      t=setTimeout(function(){
-        h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";
-      },config.scriptTimeout),
-      tk=d.createElement("script"),
-      f=false,
-      s=d.getElementsByTagName("script")[0],
-      a;
-
-      h.className+=" wf-loading";
-
-      tk.src='https://use.typekit.net/'+config.kitId+'.js';
-      tk.async=true;
-
-      tk.onload=tk.onreadystatechange=function(){
-        a=this.readyState;
-        if(f||a&&a!="complete"&&a!="loaded") return;
-        f=true;
-        clearTimeout(t);
-
-        try{
-          Typekit.load(config);
-        }catch(e){}
-      };
-
-      s.parentNode.insertBefore(tk,s);
-    })(document);
-  </script>
-
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="style-enhancements.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>和幸贈web</title>
+<script>
+(function(d){var config={kitId:'pty4wqz',scriptTimeout:3000,async:true},h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,'')+' wf-inactive';},config.scriptTimeout),tk=d.createElement('script'),f=false,s=d.getElementsByTagName('script')[0],a;h.className+=' wf-loading';tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!='complete'&&a!='loaded')return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)})(document);
+</script>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="seasonEffects"></div>
-  <!-- 背景 -->
-  <div class="sky"></div>
-  <div class="aurora"></div>
-  <div id="particles"></div>
-  <div id="stars"></div>
-  <div id="meteors"></div>
-  <div id="moonGlow"></div>
-
-  <!-- 以下省略 -->
-
-  <script src="script.js"></script>
-  <script src="weather.js"></script>
-  <script src="moon.js"></script>
-  <script src="particles.js"></script>
-  <script src="audio.js"></script>
-  <script src="compass.js"></script>
-  <script src="season.js"></script>
-  <script src="zodiac.js"></script>
-  <script src="railway.js"></script>
-  <script src="season-effects.js"></script>
+<div class="sky"></div>
+<header>
+<h1>和幸贈web</h1>
+<p>暮らしを少し便利にするツール集</p>
+</header>
+<main class="portal">
+<a class="card" href="./calculator/"><span>🧮</span><h2>電卓</h2></a>
+<a class="card" href="./memo/"><span>📝</span><h2>メモ帳</h2></a>
+<a class="card" href="./clock/"><span>🕒</span><h2>時計</h2></a>
+<a class="card" href="./weather/"><span>☀️</span><h2>気象</h2></a>
+<a class="card" href="./stopwatch/"><span>⏱</span><h2>ストップウォッチ</h2></a>
+<a class="card" href="./timer/"><span>⏳</span><h2>タイマー</h2></a>
+<a class="card" href="./paint/"><span>🎨</span><h2>ペイント</h2></a>
+<a class="card" href="./pedometer/"><span>🚶</span><h2>万歩計</h2></a>
+<a class="card" href="./compass/"><span>🧭</span><h2>コンパス</h2></a>
+<a class="card" href="./search/"><span>🔎</span><h2>検索エンジン</h2></a>
+</main>
 </body>
 </html>
