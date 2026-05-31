@@ -1,0 +1,330 @@
+/* =========================
+   和幸贈web メモ帳
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:30px;
+
+  font-family:
+  "fot-tsukuardgothic-std",
+  sans-serif;
+
+  color:white;
+
+  overflow:hidden;
+
+  background:
+  linear-gradient(
+    135deg,
+    #ffd6f7,
+    #f3c8ff,
+    #d9cfff,
+    #ffc9ef,
+    #e2d1ff
+  );
+
+  background-size:
+  600% 600%;
+
+  animation:
+  gradientMove 20s ease infinite;
+}
+
+/* =========================
+   背景アニメーション
+========================= */
+
+@keyframes gradientMove{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+/* =========================
+   ガラスカード
+========================= */
+
+.memo-card{
+
+  width:min(900px,95vw);
+
+  padding:35px;
+
+  border-radius:40px;
+
+  background:
+  rgba(255,255,255,.18);
+
+  backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  -webkit-backdrop-filter:
+  blur(30px)
+  saturate(180%);
+
+  border:
+  1px solid
+  rgba(255,255,255,.3);
+
+  box-shadow:
+  0 20px 60px
+  rgba(120,80,255,.15);
+
+}
+
+/* =========================
+   タイトル
+========================= */
+
+h1{
+
+  text-align:center;
+
+  margin-bottom:25px;
+
+  font-size:2rem;
+
+  font-weight:700;
+
+}
+
+/* =========================
+   タイトル入力
+========================= */
+
+#title{
+
+  width:100%;
+
+  padding:15px;
+
+  border:none;
+
+  border-radius:20px;
+
+  outline:none;
+
+  font-size:1.1rem;
+
+  margin-bottom:20px;
+
+  background:
+  rgba(255,255,255,.7);
+
+}
+
+/* =========================
+   本文
+========================= */
+
+#memo{
+
+  width:100%;
+
+  height:400px;
+
+  resize:none;
+
+  border:none;
+
+  border-radius:25px;
+
+  outline:none;
+
+  padding:20px;
+
+  font-size:1rem;
+
+  line-height:1.8;
+
+  background:
+  rgba(255,255,255,.75);
+
+}
+
+/* =========================
+   情報欄
+========================= */
+
+.info{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:15px;
+
+  font-size:.95rem;
+
+  opacity:.9;
+
+}
+
+/* =========================
+   ボタン
+========================= */
+
+.buttons{
+
+  display:flex;
+
+  gap:15px;
+
+  margin-top:25px;
+
+  flex-wrap:wrap;
+
+}
+
+button{
+
+  border:none;
+
+  cursor:pointer;
+
+  padding:12px 22px;
+
+  border-radius:999px;
+
+  font-size:1rem;
+
+  color:white;
+
+  background:
+  linear-gradient(
+    135deg,
+    #ff8bd5,
+    #b98dff
+  );
+
+  transition:
+  transform .2s,
+  box-shadow .2s;
+
+}
+
+button:hover{
+
+  transform:
+  translateY(-3px);
+
+  box-shadow:
+  0 8px 20px
+  rgba(150,100,255,.3);
+
+}
+
+/* =========================
+   戻るリンク
+========================= */
+
+a{
+
+  display:inline-block;
+
+  margin-top:25px;
+
+  color:white;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+}
+
+a:hover{
+
+  text-decoration:underline;
+
+}
+
+/* =========================
+   ダークモード
+========================= */
+
+body.dark{
+
+  background:
+  linear-gradient(
+    135deg,
+    #1c1630,
+    #2c204f,
+    #241b40
+  );
+
+}
+
+body.dark .memo-card{
+
+  background:
+  rgba(20,20,35,.55);
+
+}
+
+body.dark #title,
+body.dark #memo{
+
+  background:
+  rgba(255,255,255,.12);
+
+  color:white;
+
+}
+
+body.dark #title::placeholder,
+body.dark #memo::placeholder{
+
+  color:
+  rgba(255,255,255,.7);
+
+}
+
+/* =========================
+   スマホ
+========================= */
+
+@media(max-width:768px){
+
+  .memo-card{
+
+    padding:20px;
+
+  }
+
+  #memo{
+
+    height:300px;
+
+  }
+
+  h1{
+
+    font-size:1.6rem;
+
+  }
+
+}
