@@ -1,0 +1,60 @@
+/* 和幸贈web 追加演出 */
+
+.sky{
+  border-radius:40px;
+  background:linear-gradient(135deg,#ffd6f7,#f2c8ff,#dfc9ff,#f8d6ff,#e4d0ff) !important;
+  background-size:700% 700% !important;
+  animation:dreamyGradientPlus 35s ease-in-out infinite !important;
+}
+
+.sky::before,
+.sky::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  filter:blur(140px);
+}
+
+.sky::before{
+  width:900px;
+  height:900px;
+  left:-200px;
+  top:-150px;
+  background:radial-gradient(circle,rgba(255,180,240,.45),transparent 70%);
+  animation:blobPink 22s ease-in-out infinite;
+}
+
+.sky::after{
+  width:1000px;
+  height:1000px;
+  right:-250px;
+  bottom:-200px;
+  background:radial-gradient(circle,rgba(190,170,255,.45),transparent 70%);
+  animation:blobPurple 30s ease-in-out infinite;
+}
+
+.glass-card{
+  border-radius:42px !important;
+  backdrop-filter:blur(38px) saturate(200%) !important;
+  box-shadow:0 20px 60px rgba(120,90,255,.18), inset 0 1px 0 rgba(255,255,255,.55) !important;
+}
+
+@keyframes dreamyGradientPlus{
+  0%{background-position:0% 50%;}
+  25%{background-position:100% 20%;}
+  50%{background-position:100% 100%;}
+  75%{background-position:20% 100%;}
+  100%{background-position:0% 50%;}
+}
+
+@keyframes blobPink{
+  0%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(200px,120px) scale(1.3);}
+  100%{transform:translate(0,0) scale(1);}
+}
+
+@keyframes blobPurple{
+  0%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(-250px,-120px) scale(1.25);}
+  100%{transform:translate(0,0) scale(1);}
+}
